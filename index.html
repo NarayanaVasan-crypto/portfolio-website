@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Narayana Vasan S S — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg2: #111118;
+  --bg3: #1a1a24;
+  --accent: #6c63ff;
+  --accent2: #ff6b6b;
+  --accent3: #43e97b;
+  --text: #f0eeff;
+  --text2: #9b97b8;
+  --text3: #5c5878;
+  --border: rgba(108,99,255,0.15);
+  --card: rgba(255,255,255,0.03);
+  --glow: rgba(108,99,255,0.3);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none}
+
+/* Custom cursor */
+.cursor{position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s,width .2s,height .2s;mix-blend-mode:screen}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(108,99,255,0.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .15s ease-out,width .3s,height .3s,border-color .3s}
+body:has(a:hover) .cursor{width:16px;height:16px}
+body:has(a:hover) .cursor-ring{width:50px;height:50px;border-color:var(--accent)}
+body:has(button:hover) .cursor{width:16px;height:16px}
+
+/* Noise texture overlay */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1;opacity:.4}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.4rem 4rem;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,15,0.7);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:-.02em;color:var(--text)}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2.5rem}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:.875rem;letter-spacing:.05em;text-transform:uppercase;transition:color .2s;font-weight:500}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--accent);color:#fff;padding:.5rem 1.2rem;border-radius:6px;text-decoration:none;font-size:.85rem;font-weight:500;transition:opacity .2s,transform .2s}
+.nav-cta:hover{opacity:.85;transform:translateY(-1px)}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;align-items:center;padding:0 4rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.25}
+.orb1{width:600px;height:600px;background:radial-gradient(circle,var(--accent),transparent);top:-100px;right:-100px}
+.orb2{width:400px;height:400px;background:radial-gradient(circle,#ff6b6b,transparent);bottom:-50px;left:-50px}
+.orb3{width:300px;height:300px;background:radial-gradient(circle,var(--accent3),transparent);top:40%;left:40%}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(108,99,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(108,99,255,0.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent)}
+.hero-content{position:relative;z-index:2;max-width:750px}
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(108,99,255,0.1);border:1px solid rgba(108,99,255,0.3);color:var(--accent);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;padding:.35rem 1rem;border-radius:100px;margin-bottom:2rem;font-family:'DM Mono',monospace}
+.hero-tag::before{content:'';width:6px;height:6px;background:var(--accent3);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+h1.hero-name{font-family:'Syne',sans-serif;font-size:clamp(3rem,7vw,6rem);font-weight:800;line-height:1;letter-spacing:-.04em;margin-bottom:.75rem}
+h1.hero-name .line2{color:transparent;-webkit-text-stroke:1px rgba(108,99,255,0.6)}
+.hero-roles{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.role-pill{padding:.35rem .9rem;background:var(--bg3);border:1px solid var(--border);border-radius:100px;font-size:.8rem;color:var(--text2);font-family:'DM Mono',monospace}
+.role-pill.active{background:rgba(108,99,255,0.15);border-color:rgba(108,99,255,0.4);color:var(--accent)}
+.hero-desc{font-size:1.1rem;color:var(--text2);line-height:1.75;max-width:540px;margin-bottom:2.5rem;font-weight:300}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{background:var(--accent);color:#fff;padding:.75rem 1.75rem;border-radius:8px;text-decoration:none;font-weight:500;transition:all .25s;position:relative;overflow:hidden}
+.btn-primary::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.1),transparent);opacity:0;transition:opacity .2s}
+.btn-primary:hover::after{opacity:1}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(108,99,255,0.4)}
+.btn-outline{border:1px solid var(--border);color:var(--text2);padding:.75rem 1.75rem;border-radius:8px;text-decoration:none;font-weight:500;transition:all .25s}
+.btn-outline:hover{border-color:var(--accent);color:var(--text);background:rgba(108,99,255,0.05)}
+.hero-stats{display:flex;gap:3rem;margin-top:4rem;padding-top:2rem;border-top:1px solid var(--border)}
+.stat-num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--text)}
+.stat-label{font-size:.8rem;color:var(--text3);letter-spacing:.05em;text-transform:uppercase;margin-top:.2rem}
+.hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--text3);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;z-index:2}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollDown 2s infinite}
+@keyframes scrollDown{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* Section base */
+section{padding:7rem 4rem;position:relative;z-index:2}
+.section-label{font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-.03em;margin-bottom:1rem;line-height:1.1}
+.section-sub{color:var(--text2);font-size:1rem;max-width:520px;line-height:1.7;font-weight:300}
+
+/* About */
+.about{background:var(--bg2)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:4rem}
+.about-text p{color:var(--text2);line-height:1.8;font-weight:300;margin-bottom:1.2rem}
+.about-text p strong{color:var(--text);font-weight:500}
+.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.skill-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;transition:border-color .2s,transform .2s}
+.skill-item:hover{border-color:rgba(108,99,255,0.4);transform:translateY(-2px)}
+.skill-cat{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-family:'DM Mono',monospace;margin-bottom:.4rem}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.3rem}
+.skill-tag{font-size:.75rem;color:var(--text2);background:rgba(255,255,255,0.04);padding:.2rem .55rem;border-radius:4px}
+.about-card{background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:2rem;position:relative;overflow:hidden}
+.about-card::before{content:'';position:absolute;top:-1px;left:2rem;right:2rem;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+.about-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#9c88ff);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:1.75rem;font-weight:800;color:#fff;margin-bottom:1.5rem}
+.about-name{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:.3rem}
+.about-title{color:var(--text2);font-size:.875rem;margin-bottom:1.5rem}
+.about-info{display:flex;flex-direction:column;gap:.75rem}
+.info-row{display:flex;gap:.75rem;align-items:flex-start}
+.info-icon{width:32px;height:32px;background:rgba(108,99,255,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;margin-top:1px}
+.info-label{font-size:.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em}
+.info-val{font-size:.875rem;color:var(--text2);margin-top:.1rem}
+
+/* Projects */
+.projects{background:var(--bg)}
+.projects-filter{display:flex;gap:.6rem;flex-wrap:wrap;margin:2.5rem 0 3rem}
+.filter-btn{padding:.45rem 1.1rem;border:1px solid var(--border);background:transparent;color:var(--text2);border-radius:100px;font-size:.8rem;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;letter-spacing:.03em}
+.filter-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.filter-btn:hover:not(.active){border-color:rgba(108,99,255,0.4);color:var(--text)}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:1.5rem}
+.project-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all .3s;position:relative;cursor:pointer}
+.project-card:hover{transform:translateY(-6px);border-color:rgba(108,99,255,0.35);box-shadow:0 20px 60px rgba(0,0,0,0.4),0 0 0 1px rgba(108,99,255,0.15)}
+.project-card:hover .card-glow{opacity:1}
+.card-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(108,99,255,0.08),transparent 70%);opacity:0;transition:opacity .3s;pointer-events:none}
+.card-header{padding:1.5rem 1.5rem 1rem;position:relative}
+.card-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:1rem}
+.card-role{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-family:'DM Mono',monospace;margin-bottom:.4rem}
+.card-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.6rem;line-height:1.3}
+.card-desc{font-size:.875rem;color:var(--text2);line-height:1.65;font-weight:300}
+.card-body{padding:0 1.5rem 1.5rem}
+.card-tech{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem}
+.tech-badge{font-size:.7rem;font-family:'DM Mono',monospace;padding:.2rem .6rem;border-radius:4px;border:1px solid}
+.card-footer{padding:1rem 1.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.card-metric{font-size:.75rem;color:var(--text3)}
+.card-metric span{color:var(--accent3);font-weight:500}
+.card-arrow{width:28px;height:28px;border-radius:50%;background:rgba(108,99,255,0.1);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:.75rem;transition:all .2s}
+.project-card:hover .card-arrow{background:var(--accent);color:#fff;transform:translate(2px,-2px)}
+
+/* Frontend card */
+.fe-icon{background:rgba(108,99,255,0.15)}
+.fe-role{color:var(--accent)}
+.fe-badge{background:rgba(108,99,255,0.08);border-color:rgba(108,99,255,0.25);color:#9c8fff}
+/* DA card */
+.da-icon{background:rgba(67,233,123,0.12)}
+.da-role{color:var(--accent3)}
+.da-badge{background:rgba(67,233,123,0.08);border-color:rgba(67,233,123,0.2);color:#43e97b}
+/* SD card */
+.sd-icon{background:rgba(255,107,107,0.12)}
+.sd-role{color:var(--accent2)}
+.sd-badge{background:rgba(255,107,107,0.08);border-color:rgba(255,107,107,0.2);color:#ff8e8e}
+/* CV card */
+.cv-icon{background:rgba(255,190,60,0.12)}
+.cv-role{color:#ffbe3c}
+.cv-badge{background:rgba(255,190,60,0.08);border-color:rgba(255,190,60,0.2);color:#ffbe3c}
+
+/* Experience */
+.experience{background:var(--bg2)}
+.exp-timeline{margin-top:3.5rem;position:relative}
+.exp-timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--accent),transparent)}
+.exp-item{padding-left:2.5rem;padding-bottom:3rem;position:relative}
+.exp-item::before{content:'';position:absolute;left:-5px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--glow)}
+.exp-date{font-family:'DM Mono',monospace;font-size:.75rem;color:var(--accent);letter-spacing:.08em;margin-bottom:.5rem}
+.exp-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.25rem}
+.exp-company{font-size:.875rem;color:var(--text2);margin-bottom:.75rem}
+.exp-desc{font-size:.875rem;color:var(--text3);line-height:1.7;font-weight:300}
+
+/* Education */
+.education{background:var(--bg)}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem}
+.edu-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.75rem;transition:all .25s;position:relative;overflow:hidden}
+.edu-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),#9c88ff);transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.edu-card:hover{border-color:rgba(108,99,255,0.3);transform:translateY(-3px)}
+.edu-card:hover::after{transform:scaleX(1)}
+.edu-year{font-family:'DM Mono',monospace;font-size:.75rem;color:var(--accent);margin-bottom:.75rem;letter-spacing:.08em}
+.edu-degree{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.35rem;line-height:1.3}
+.edu-school{font-size:.85rem;color:var(--text2)}
+
+/* Contact */
+.contact{background:var(--bg2);text-align:center}
+.contact-inner{max-width:600px;margin:0 auto}
+.contact-email{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;color:var(--text);text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:.25rem;display:inline-block;margin:2rem 0;transition:color .2s}
+.contact-email:hover{color:var(--accent)}
+.contact-links{display:flex;justify-content:center;gap:1rem;margin-top:2rem;flex-wrap:wrap}
+.contact-link{padding:.6rem 1.4rem;border:1px solid var(--border);border-radius:8px;color:var(--text2);text-decoration:none;font-size:.875rem;transition:all .2s;display:flex;align-items:center;gap:.5rem}
+.contact-link:hover{border-color:var(--accent);color:var(--text);background:rgba(108,99,255,0.05)}
+
+/* Footer */
+footer{background:var(--bg);padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;z-index:2;position:relative}
+.footer-text{font-size:.8rem;color:var(--text3)}
+.footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem;color:var(--text3)}
+
+/* Animations */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* Project modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;display:flex;align-items:center;justify-content:center;padding:2rem;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(10px)}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--bg2);border:1px solid var(--border);border-radius:20px;max-width:640px;width:100%;max-height:85vh;overflow-y:auto;padding:2.5rem;transform:scale(.95);transition:transform .3s}
+.modal-overlay.open .modal{transform:scale(1)}
+.modal-close{position:absolute;top:1.5rem;right:1.5rem;width:36px;height:36px;border-radius:50%;background:var(--bg3);border:1px solid var(--border);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.modal-close:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.modal-role{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-family:'DM Mono',monospace;margin-bottom:.5rem}
+.modal-title{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:.5rem;line-height:1.2}
+.modal-sub{color:var(--text2);font-size:.875rem;margin-bottom:1.5rem;font-weight:300;line-height:1.6}
+.modal-section{margin-bottom:1.5rem}
+.modal-section-label{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);font-family:'DM Mono',monospace;margin-bottom:.75rem}
+.modal-point{display:flex;gap:.75rem;margin-bottom:.6rem;font-size:.875rem;color:var(--text2);line-height:1.6}
+.modal-point::before{content:'→';color:var(--accent);flex-shrink:0;margin-top:.05rem}
+.modal-tech{display:flex;flex-wrap:wrap;gap:.4rem}
+.modal-tech-tag{font-size:.75rem;font-family:'DM Mono',monospace;padding:.25rem .7rem;border-radius:5px;background:rgba(108,99,255,0.1);border:1px solid rgba(108,99,255,0.25);color:#9c8fff}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .hero,.section{padding-left:1.5rem;padding-right:1.5rem}
+  section{padding:4rem 1.5rem}
+  .about-grid,.edu-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:1rem;text-align:center;padding:1.5rem}
+  .hero-stats{gap:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-logo">NV<span>.</span></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="mailto:nsundaravadivel21@gmail.com" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+    <div class="hero-grid"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag">Available for opportunities</div>
+    <h1 class="hero-name">
+      Narayana<br>
+      <span class="line2">Vasan S S</span>
+    </h1>
+    <div class="hero-roles">
+      <span class="role-pill active">Frontend Developer</span>
+      <span class="role-pill">Data Analyst</span>
+      <span class="role-pill">Software Developer</span>
+    </div>
+    <p class="hero-desc">B.Tech ECE student at SASTRA University building responsive web apps, data dashboards, and full-stack systems — turning ideas into products that work.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">5</div><div class="stat-label">Projects Built</div></div>
+      <div><div class="stat-num">3</div><div class="stat-label">Roles Ready</div></div>
+      <div><div class="stat-num">2026</div><div class="stat-label">Graduating</div></div>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div>Scroll</div>
+</section>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="section-label">About me</div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <h2 class="section-title">Building things that<br>matter with data & code</h2>
+      <p>I'm a final-year <strong>Electronics & Communication Engineering</strong> student at SASTRA Deemed University with a strong passion for software development and data analytics.</p>
+      <p>I work across the full spectrum — from crafting <strong>pixel-perfect React interfaces</strong> to designing <strong>MySQL databases</strong> and building <strong>Power BI dashboards</strong> that turn raw data into clear decisions.</p>
+      <p>Outside of building projects, I explore computer vision with OpenCV and MediaPipe, and I'm constantly sharpening my skills in Python, SQL, and modern frontend frameworks.</p>
+      <div class="skills-grid">
+        <div class="skill-item">
+          <div class="skill-cat">Frontend</div>
+          <div class="skill-tags">
+            <span class="skill-tag">React</span><span class="skill-tag">HTML5</span><span class="skill-tag">CSS3</span><span class="skill-tag">JavaScript</span><span class="skill-tag">Tailwind</span>
+          </div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-cat">Data & BI</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Power BI</span><span class="skill-tag">Excel</span><span class="skill-tag">SQL</span><span class="skill-tag">Pandas</span><span class="skill-tag">DAX</span>
+          </div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-cat">Backend</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span><span class="skill-tag">Django</span><span class="skill-tag">Flask</span><span class="skill-tag">REST API</span>
+          </div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-cat">Tools</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Git</span><span class="skill-tag">MySQL</span><span class="skill-tag">Postman</span><span class="skill-tag">Figma</span><span class="skill-tag">VS Code</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal" style="transition-delay:.15s">
+      <div class="about-card">
+        <div class="about-avatar">NV</div>
+        <div class="about-name">Narayana Vasan S S</div>
+        <div class="about-title">Student Developer · Class of 2026</div>
+        <div class="about-info">
+          <div class="info-row">
+            <div class="info-icon">🎓</div>
+            <div><div class="info-label">University</div><div class="info-val">SASTRA Deemed University, Kumbakonam</div></div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📐</div>
+            <div><div class="info-label">Degree</div><div class="info-val">B.Tech Electronics & Communication Engineering</div></div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📍</div>
+            <div><div class="info-label">Location</div><div class="info-val">Kumbakonam, Tamil Nadu, India</div></div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📧</div>
+            <div><div class="info-label">Email</div><div class="info-val">nsundaravadivel21@gmail.com</div></div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📱</div>
+            <div><div class="info-label">Phone</div><div class="info-val">9360520822</div></div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">🌐</div>
+            <div><div class="info-label">Languages</div><div class="info-val">Tamil (Native) · English (Professional)</div></div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">💼</div>
+            <div><div class="info-label">LinkedIn</div><div class="info-val"><a href="https://www.linkedin.com/in/narayana-vasan-ss-6b6a7726b" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;">narayana-vasan-ss</a></div></div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">🐙</div>
+            <div><div class="info-label">GitHub</div><div class="info-val"><a href="https://github.com/NarayanaVasan-crypto" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;">NarayanaVasan-crypto</a></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section class="projects" id="projects">
+  <div class="section-label">Work</div>
+  <h2 class="section-title reveal">Projects & Builds</h2>
+  <p class="section-sub reveal">Real-world projects spanning frontend development, data analytics, and software engineering.</p>
+  <div class="projects-filter reveal">
+    <button class="filter-btn active" onclick="filterProjects('all',this)">All Projects</button>
+    <button class="filter-btn" onclick="filterProjects('frontend',this)">Frontend</button>
+    <button class="filter-btn" onclick="filterProjects('data',this)">Data Analyst</button>
+    <button class="filter-btn" onclick="filterProjects('software',this)">Software Dev</button>
+    <button class="filter-btn" onclick="filterProjects('cv',this)">Computer Vision</button>
+  </div>
+  <div class="projects-grid" id="projectsGrid">
+
+    <!-- P1: E-Commerce React SPA -->
+    <div class="project-card reveal" data-cat="frontend" onclick="openModal('p1')">
+      <div class="card-glow"></div>
+      <div class="card-header">
+        <div class="card-icon fe-icon">⚛</div>
+        <div class="card-role fe-role">Frontend Development</div>
+        <div class="card-title">E-Commerce Product Catalogue — React SPA</div>
+        <div class="card-desc">A fully functional single-page e-commerce app with product listing, search, cart, and category filtering — powered by a public REST API.</div>
+      </div>
+      <div class="card-body">
+        <div class="card-tech">
+          <span class="tech-badge fe-badge">React</span>
+          <span class="tech-badge fe-badge">Context API</span>
+          <span class="tech-badge fe-badge">CSS Modules</span>
+          <span class="tech-badge fe-badge">REST API</span>
+          <span class="tech-badge fe-badge">Vercel</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-metric">Response time: <span>&lt;200ms</span></div>
+        <div class="card-arrow">↗</div>
+      </div>
+    </div>
+
+    <!-- P2: Portfolio -->
+    <div class="project-card reveal" data-cat="frontend" onclick="openModal('p2')" style="transition-delay:.05s">
+      <div class="card-glow"></div>
+      <div class="card-header">
+        <div class="card-icon fe-icon">🌐</div>
+        <div class="card-role fe-role">Frontend Development</div>
+        <div class="card-title">Personal Portfolio Website</div>
+        <div class="card-desc">Fully responsive, zero-dependency portfolio built with vanilla HTML/CSS/JS — custom animations, accessibility, and 90+ Lighthouse score.</div>
+      </div>
+      <div class="card-body">
+        <div class="card-tech">
+          <span class="tech-badge fe-badge">HTML5</span>
+          <span class="tech-badge fe-badge">CSS3</span>
+          <span class="tech-badge fe-badge">JavaScript</span>
+          <span class="tech-badge fe-badge">GitHub Pages</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-metric">Lighthouse score: <span>90+</span></div>
+        <div class="card-arrow">↗</div>
+      </div>
+    </div>
+
+    <!-- P3: Student Analytics -->
+    <div class="project-card reveal" data-cat="data" onclick="openModal('p3')" style="transition-delay:.1s">
+      <div class="card-glow"></div>
+      <div class="card-header">
+        <div class="card-icon da-icon">📊</div>
+        <div class="card-role da-role">Data Analytics</div>
+        <div class="card-title">Student Performance & Attendance Dashboard</div>
+        <div class="card-desc">End-to-end analytics pipeline — MySQL database design, Excel PivotTable analysis, and interactive Power BI dashboard with DAX measures.</div>
+      </div>
+      <div class="card-body">
+        <div class="card-tech">
+          <span class="tech-badge da-badge">MySQL</span>
+          <span class="tech-badge da-badge">Excel</span>
+          <span class="tech-badge da-badge">Power BI</span>
+          <span class="tech-badge da-badge">DAX</span>
+          <span class="tech-badge da-badge">Power Query</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-metric">Reporting time: <span>6h → 30min</span></div>
+        <div class="card-arrow">↗</div>
+      </div>
+    </div>
+
+    <!-- P4: Task Manager API -->
+    <div class="project-card reveal" data-cat="software" onclick="openModal('p4')" style="transition-delay:.15s">
+      <div class="card-glow"></div>
+      <div class="card-header">
+        <div class="card-icon sd-icon">🛠</div>
+        <div class="card-role sd-role">Software Development</div>
+        <div class="card-title">Task Management REST API — Django + React</div>
+        <div class="card-desc">Full-stack Jira-style app with project boards, JWT auth, role-based access, and an 85% test-covered Django REST backend.</div>
+      </div>
+      <div class="card-body">
+        <div class="card-tech">
+          <span class="tech-badge sd-badge">Python</span>
+          <span class="tech-badge sd-badge">Django</span>
+          <span class="tech-badge sd-badge">React</span>
+          <span class="tech-badge sd-badge">MySQL</span>
+          <span class="tech-badge sd-badge">JWT</span>
+          <span class="tech-badge sd-badge">GitHub Actions</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-metric">Test coverage: <span>85%</span></div>
+        <div class="card-arrow">↗</div>
+      </div>
+    </div>
+
+    <!-- P5: Gesture Recognition -->
+    <div class="project-card reveal" data-cat="cv" onclick="openModal('p5')" style="transition-delay:.2s">
+      <div class="card-glow"></div>
+      <div class="card-header">
+        <div class="card-icon cv-icon">✋</div>
+        <div class="card-role cv-role">Computer Vision</div>
+        <div class="card-title">Real-Time Hand Gesture Recognition — Virtual Mouse</div>
+        <div class="card-desc">Hardware-independent gesture control system using a standard webcam — maps 21-point hand landmarks to OS mouse events in real-time.</div>
+      </div>
+      <div class="card-body">
+        <div class="card-tech">
+          <span class="tech-badge cv-badge">Python</span>
+          <span class="tech-badge cv-badge">OpenCV</span>
+          <span class="tech-badge cv-badge">MediaPipe</span>
+          <span class="tech-badge cv-badge">PyAutoGUI</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-metric">Input: <span>Webcam only</span></div>
+        <div class="card-arrow">↗</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Experience -->
+<section class="experience" id="experience">
+  <div class="section-label">Experience</div>
+  <h2 class="section-title reveal">Work History</h2>
+  <div class="exp-timeline reveal">
+    <div class="exp-item">
+      <div class="exp-date">JUN 2024</div>
+      <div class="exp-title">Network Operations Intern</div>
+      <div class="exp-company">BSNL Ltd · Kumbakonam, Tamil Nadu</div>
+      <div class="exp-desc">Gained hands-on exposure to enterprise switch controls, signal distribution, and regional hub management. Observed and recorded network traffic data, studied TCP/IP protocols, traffic load metrics, and 2G-to-4G migration infrastructure. Developed analytical thinking applied directly to later data analysis projects.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section class="education" id="education">
+  <div class="section-label">Education</div>
+  <h2 class="section-title reveal">Academic Background</h2>
+  <div class="edu-grid reveal">
+    <div class="edu-card">
+      <div class="edu-year">2022 — 2026</div>
+      <div class="edu-degree">B.Tech — Electronics & Communication Engineering</div>
+      <div class="edu-school">SASTRA Deemed to be University, Kumbakonam</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2022</div>
+      <div class="edu-degree">Higher Secondary School (Class XII)</div>
+      <div class="edu-school">Sri Matha Matriculation Higher Secondary School, Kumbakonam</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">Certifications</div>
+      <div class="edu-degree">Microsoft Power BI — DAX, Power Query & Dashboard Design</div>
+      <div class="edu-school">Udemy / Microsoft Learn</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">Certifications</div>
+      <div class="edu-degree">SQL for Data Analysis + Excel for Data Analytics</div>
+      <div class="edu-school">Online — MySQL Fundamentals & Advanced Excel</div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="section-label" style="text-align:center">Contact</div>
+    <h2 class="section-title reveal" style="font-size:clamp(2rem,5vw,3.5rem)">Let's build something<br>great together</h2>
+    <p class="section-sub reveal" style="margin:0 auto 1rem;text-align:center">Open to full-time roles, internships, and freelance projects across frontend development, data analytics, and software engineering.</p>
+    <a href="mailto:nsundaravadivel21@gmail.com" class="contact-email reveal">nsundaravadivel21@gmail.com</a>
+    <div class="contact-links reveal">
+      <a href="tel:9360520822" class="contact-link">📱 9360520822</a>
+      <a href="https://www.linkedin.com/in/narayana-vasan-ss-6b6a7726b" target="_blank" rel="noopener noreferrer" class="contact-link">💼 LinkedIn</a>
+      <a href="https://github.com/NarayanaVasan-crypto" target="_blank" rel="noopener noreferrer" class="contact-link">🐙 GitHub</a>
+      <a href="#" class="contact-link">📄 Resume</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">NV.</div>
+  <div class="footer-text">© 2025 Narayana Vasan S S · Built with HTML, CSS & JavaScript</div>
+  <div class="footer-text">Kumbakonam, Tamil Nadu</div>
+</footer>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal" style="position:relative">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  setTimeout(() => {
+    ring.style.left = e.clientX + 'px';
+    ring.style.top = e.clientY + 'px';
+  }, 80);
+});
+
+// Reveal on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Filter
+function filterProjects(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.project-card').forEach(card => {
+    const show = cat === 'all' || card.dataset.cat === cat;
+    card.style.display = show ? 'flex' : 'none';
+    card.style.flexDirection = 'column';
+  });
+}
+
+// Modals
+const modals = {
+  p1: {
+    role: 'Frontend Development', roleColor: '#6c63ff',
+    title: 'E-Commerce Product Catalogue — React SPA',
+    sub: 'A fully functional single-page e-commerce application with product listing, search, cart management, and category filtering, integrated with a public REST API and deployed on Vercel.',
+    highlights: [
+      'Integrated FakeStore public REST API — dynamically renders 20+ real products with title, price, image, category, and rating.',
+      'Built global cart state using React Context API + useReducer, eliminating prop drilling across 8+ nested components.',
+      'Optimised re-renders with React.memo and useMemo — achieved sub-200ms interaction response times.',
+      'Built fully mobile-responsive layout using CSS Grid and Flexbox, validated across Chrome, Firefox, and Safari.',
+      'Deployed on Vercel with GitHub Actions CI/CD for automated builds and deployments on every push.'
+    ],
+    tech: ['React', 'Context API', 'useReducer', 'CSS Modules', 'FakeStore REST API', 'Vercel', 'GitHub Actions']
+  },
+  p2: {
+    role: 'Frontend Development', roleColor: '#6c63ff',
+    title: 'Personal Portfolio Website',
+    sub: 'A fully responsive, zero-dependency developer portfolio built in vanilla HTML/CSS/JS — demonstrating core frontend engineering discipline without any frameworks.',
+    highlights: [
+      'Built a custom cursor system, smooth scroll navigation, and scroll-reveal animations using IntersectionObserver API — all in vanilla JavaScript.',
+      'Applied semantic HTML5 and WCAG-compliant markup for full accessibility compliance.',
+      'Achieved 90+ Lighthouse score across Performance, Accessibility, Best Practices, and SEO.',
+      'Deployed on GitHub Pages with GitHub Actions CI/CD — live public URL for portfolio demonstration.'
+    ],
+    tech: ['HTML5', 'CSS3', 'Vanilla JavaScript', 'IntersectionObserver API', 'GitHub Pages', 'GitHub Actions']
+  },
+  p3: {
+    role: 'Data Analytics', roleColor: '#43e97b',
+    title: 'Student Performance & Attendance Analytics Dashboard',
+    sub: 'A complete end-to-end analytics project — from SQL database design to Excel PivotTable analysis to interactive Power BI dashboard — covering the full data analyst workflow.',
+    highlights: [
+      'Designed a normalised MySQL relational database with 3 linked tables (students, subjects, marks) using primary keys, foreign keys, and proper constraints.',
+      'Wrote 4 analytical SQL queries using JOIN, GROUP BY, HAVING, and CASE WHEN — calculating avg scores, pass/fail rates, grade distribution, and top students.',
+      'Built an Excel workbook with dynamic PivotTables, VLOOKUP/INDEX-MATCH KPI summaries, conditional colour formatting (red/green), and interactive Slicers.',
+      'Developed 4 DAX measures in Power BI: Avg Score, Pass Rate %, Top Score, Total Students — displayed across KPI cards.',
+      'Built an interactive 5-visual Power BI dashboard with cross-filtering, conditional colours, and an automated Power Query refresh pipeline.',
+      'Reduced monthly reporting effort from 6 hours to under 30 minutes via Power Query automation.'
+    ],
+    tech: ['MySQL', 'MySQL Workbench', 'Microsoft Excel', 'Power BI Desktop', 'DAX', 'Power Query', 'Python (Pandas)']
+  },
+  p4: {
+    role: 'Software Development', roleColor: '#ff6b6b',
+    title: 'Task Management REST API — Django + React',
+    sub: 'A full-stack Jira-style task management application with project boards, task assignment, priority tagging, and status tracking — built with Django REST Framework and React.',
+    highlights: [
+      'Architected RESTful CRUD endpoints for Users, Projects, Tasks, and Comments using Django REST Framework with JWT-based authentication.',
+      'Implemented role-based access control (Admin / Member) — admins can manage projects and assign tasks, members can only view and update assigned tasks.',
+      'Designed a normalised MySQL schema with indexing on status and assignee columns — queries return under 50ms on 10,000-row datasets.',
+      'Built a React Kanban board frontend with drag-and-drop task management, priority/assignee filtering, and real-time status updates.',
+      'Achieved 85% unit test coverage using Django TestCase framework, integrated with GitHub Actions CI pipeline for automated testing on every commit.',
+      'Documented all API endpoints with Postman collections and a detailed README with setup and architecture diagrams.'
+    ],
+    tech: ['Python', 'Django REST Framework', 'React', 'MySQL', 'JWT Authentication', 'GitHub Actions', 'Postman']
+  },
+  p5: {
+    role: 'Computer Vision', roleColor: '#ffbe3c',
+    title: 'Real-Time Hand Gesture Recognition — Virtual Mouse',
+    sub: 'A hardware-independent gesture recognition system that uses a standard webcam to control OS-level mouse events — no additional hardware required.',
+    highlights: [
+      'Developed a real-time computer vision pipeline using MediaPipe\'s 21-point hand landmark model to detect and classify hand gestures via webcam.',
+      'Mapped index fingertip coordinates to screen mouse movement using NumPy interpolation with a dead-zone threshold to eliminate cursor jitter.',
+      'Implemented click detection by measuring Euclidean distance between thumb and index/middle fingertips — with a 0.5-second cooldown to prevent accidental clicks.',
+      'Applied modular design — separated landmark detection, gesture classification, and OS event dispatch into independent, testable components.',
+      'Achieved real-time performance at 30FPS with smooth cursor control, applicable in medical, industrial, and accessibility use cases.',
+      'Submitted as a final-year project at SASTRA Deemed University.'
+    ],
+    tech: ['Python', 'OpenCV', 'MediaPipe', 'PyAutoGUI', 'NumPy', 'SASTRA University FYP']
+  }
+};
+
+function openModal(id) {
+  const m = modals[id];
+  document.getElementById('modalContent').innerHTML = `
+    <div class="modal-role" style="color:${m.roleColor}">${m.role}</div>
+    <div class="modal-title">${m.title}</div>
+    <div class="modal-sub">${m.sub}</div>
+    <div class="modal-section">
+      <div class="modal-section-label">Key Highlights</div>
+      ${m.highlights.map(h => `<div class="modal-point">${h}</div>`).join('')}
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-label">Technologies Used</div>
+      <div class="modal-tech">${m.tech.map(t => `<span class="modal-tech-tag">${t}</span>`).join('')}</div>
+    </div>
+  `;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// Hero role cycling
+const pills = document.querySelectorAll('.role-pill');
+let roleIdx = 0;
+setInterval(() => {
+  pills[roleIdx].classList.remove('active');
+  roleIdx = (roleIdx + 1) % pills.length;
+  pills[roleIdx].classList.add('active');
+}, 2000);
+</script>
+</body>
+</html>
